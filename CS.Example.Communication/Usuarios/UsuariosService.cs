@@ -37,7 +37,7 @@ namespace CS.Example.Communication.Usuarios
         /// <returns></returns>
         public static async Task<UsuarioModel> GetUsuarios(int initRow, int finishRow, string? word)
         {
-            string urlRequest = $"{URL_BASE}/Usuarios?initRow={initRow}&finishRow={finishRow}&word={word}";
+            string urlRequest = $"{URL_BASE}/Usuario?initRow={initRow}&finishRow={finishRow}&word={word}";
 
             var headers = new Dictionary<string, string>() {
                 { "Content-Type", ContentType.JSON }

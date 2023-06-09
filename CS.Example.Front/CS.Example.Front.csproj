@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CS.Example.Business\CS.Example.Business.csproj" />
     <ProjectReference Include="..\CS.Example.Common\CS.Example.Common.csproj" />
     <ProjectReference Include="..\CS.Example.Communication\CS.Example.Communication.csproj" />
