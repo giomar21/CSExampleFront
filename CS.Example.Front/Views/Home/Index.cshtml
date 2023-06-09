@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-6 text-center">
-        <button type="button" class="btn btn-primary btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Usuario") + "'");">Usuarios</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="@("window.location.href='" + @Url.Action("Index", "Usuario", new { initRow = 1, finishRow = 5 }) + "'");">Usuarios</button>
     </div>
     <div class="col-6 text-center">
         <button type="button" class="btn btn-primary btn-lg">Empresas</button>
