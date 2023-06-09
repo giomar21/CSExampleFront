@@ -1,70 +1,46 @@
 ﻿@using CS.Example.Common.Models
 @{
-    ViewBag.Title = "Index";
-    //ViewData["Title"] = "Index";
+    ViewBag.Title = "Listado de usuarios";
 }
 
 @model CS.Example.Common.Models.UsuarioModel
 
-<h1>Index</h1>
+<h1>Listado de usuarios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Agregar nuevo usuario</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr>         
             <th>
-                Id-Usuario
-            </th>
-            <th>
-                Nombre
-            </th>
-            <th>
-                Apellido Paterno
-            </th>
-            <th>
-                Apellido Materno
-            </th>
+                Nombre completo
+            </th>         
             <th>
                 Salario
             </th>
             <th>
-              CURP
+                CURP
             </th>
             <th>
                 Teléfono
             </th>
             <th>
-                Fecha de Creación
+                Fecha Creación
             </th>
             <th>
-                Fecha de Actualización
-            </th>
-            <th>
-                Activo
-            </th>
-            <th>
-                Nombre Completo
-            </th>
-            <th></th>
+                Fecha Actualización
+            </th>          
+            <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.Usuarios ?? new List<Usuario>()) {
             <tr>
+              
                 <td>
-                    @item.IdUsuario
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApellidoPaterno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApellidoMaterno)
-                </td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>             
                 <td>
                     @Html.DisplayFor(modelItem => item.Salario)
                 </td>
@@ -81,15 +57,9 @@
                     @Html.DisplayFor(modelItem => item.FechaActualizacion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Activo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreCompleto)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Detalle", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ })
                 </td>
             </tr>
     }
