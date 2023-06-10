@@ -54,9 +54,20 @@ namespace CS.Example.Business.Root.Usuarios
             }
         }
 
-        public Task<OperationResult<Usuario?>> Update(Usuario usuario)
+        public async Task<OperationResult<Usuario?>> Put(Usuario usuario)
         {
-            throw new NotImplementedException();
+            var result = new OperationResult<Usuario>();
+
+            try
+            {
+                var rUsuario = await UsuariosService.UpdateUsuario(usuario);
+                result.Data = rUsuario;
+                return result.ToSuccess();
+            }
+            catch (Exception ex)
+            {
+                return result.ToError($"Error al actualizar el usuario: {ex.Message}");
+            }
         }
     }
 }

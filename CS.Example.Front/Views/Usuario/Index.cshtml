@@ -1,7 +1,7 @@
 ﻿@using CS.Example.Common.Models
 @{
     ViewBag.Title = "Listado de usuarios";
-    Usuario usuario = new CS.Example.Common.Models.Usuario();
+    //Usuario usuario = new CS.Example.Common.Models.Usuario();
 }
 
 @model CS.Example.Common.Models.UsuarioModel
@@ -37,29 +37,37 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Usuarios ?? new List<Usuario>()) {
+    @foreach (var usuario_ in Model.Usuarios ?? new List<Usuario>()) {
             <tr>
               
                 <td>
-                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    @Html.DisplayFor(modelItem => usuario_.NombreCompleto)
                 </td>             
                 <td>
-                    $@Html.DisplayFor(modelItem => item.Salario)
+                    $@Html.DisplayFor(modelItem => usuario_.Salario)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Curp)
+                    @Html.DisplayFor(modelItem => usuario_.Curp)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Telefono)
+                    @Html.DisplayFor(modelItem => usuario_.Telefono)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                    @Html.DisplayFor(modelItem => usuario_.FechaCreacion)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaActualizacion)
+                    @Html.DisplayFor(modelItem => usuario_.FechaActualizacion)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }, new { @class= "btn btn-sm btn-primary"}) |
+                   @* @Html.ActionLink("Editar", "Edit", new { /* id=item.PrimaryKey */ }, new { @class= "btn btn-sm btn-primary"}) |*@
+                    <a class="btn btn-sm btn-primary showUsuarioEditModal"
+                       data-IdUsuario="@usuario_.IdUsuario"
+                       data-Nombre="@usuario_.Nombre"
+                       data-ApellidoPaterno="@usuario_.ApellidoPaterno"
+                       data-ApellidoMaterno="@usuario_.ApellidoMaterno"
+                       data-Curp="@usuario_.Curp"
+                       data-Telefono="@usuario_.Telefono"
+                       data-Salario="@usuario_.Salario">Editar</a> |
                     @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ }, new { @class= "btn btn-sm btn-danger"})
                 </td>
             </tr>
@@ -67,57 +75,49 @@
     </tbody>
 </table>
 
-
-
-
 <div class="modal fade" tabindex="-1" id="usuarioModal"
      data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Crear usuario</h4>
+                <h4 class="modal-title" id="tituloModalUsuario">Crear usuario</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           
             </div>
             <div class="modal-body">
 
-                <label>Registrar los datos del usuario</label>
+                <label id="lblUsuario">Registrar los datos del usuario</label>
                 <hr />
                 <div class="row">
                     <div class="col-12">
                         <form asp-action="Create" asp-controller="Usuario">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input id="IdUsuario" name="IdUsuario" class="form-control mb-2" type="hidden" />
                             <div class="form-group">
-                                <label asp-for="@usuario.Nombre" class="control-label"></label>
-                                <input asp-for="@usuario.Nombre" class="form-control mb-2" />
-                                <span asp-validation-for="@usuario.Nombre" class="text-danger"></span>
+                                <label class="control-label">Nombre</label>
+                                <input id="Nombre" name="Nombre" class="form-control mb-2" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="@usuario.ApellidoPaterno" class="control-label"></label>
-                                <input asp-for="@usuario.ApellidoPaterno" class="form-control mb-2" />
-                                <span asp-validation-for="@usuario.ApellidoPaterno" class="text-danger"></span>
+                                <label class="control-label">Apellido Paterno</label>
+                                <input id="ApellidoPaterno" name="ApellidoPaterno" class="form-control mb-2" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="@usuario.ApellidoMaterno" class="control-label"></label>
-                                <input asp-for="@usuario.ApellidoMaterno" class="form-control mb-2" />
-                                <span asp-validation-for="@usuario.ApellidoMaterno" class="text-danger"></span>
+                                <label class="control-label">Apellido Materno</label>
+                                <input id="ApellidoMaterno" name="ApellidoMaterno" class="form-control mb-2" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="@usuario.Salario" class="control-label"></label>
-                                <input asp-for="@usuario.Salario" class="form-control mb-2" />
-                                <span asp-validation-for="@usuario.Salario" class="text-danger"></span>
+                                <label class="control-label">Salario</label>
+                                <input id="Salario" name="Salario" class="form-control mb-2" type="number"/>
                             </div>
                             <div class="form-group">
-                                <label asp-for="@usuario.Curp" class="control-label"></label>
-                                <input asp-for="@usuario.Curp" class="form-control mb-2" />
-                                <span asp-validation-for="@usuario.Curp" class="text-danger"></span>
+                                <label class="control-label">CURP</label>
+                                <input id="Curp" name="Curp" class="form-control mb-2" />
                             </div>
                             <div class="form-group">
-                                <label asp-for="@usuario.Telefono" class="control-label"></label>
-                                <input asp-for="@usuario.Telefono" class="form-control mb-4" />
-                                <span asp-validation-for="@usuario.Telefono" class="text-danger"></span>
+                                <label class="control-label">Teléfono</label>
+                                <input id="Telefono" name="Telefono" class="form-control mb-2" />
                             </div>
-                            <button type="submit" class="btn btn-success button">Registrar</button>
+                            <button type="submit" class="btn btn-success button" id="btnRegistrarUsuario">Registrar</button>
                         </form>
                     </div>
                 </div>
@@ -138,6 +138,44 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#showUsuarioModal").click(function () {
+
+            $("#IdUsuario").val("00000000-0000-0000-0000-000000000000");
+            $("#Nombre").val("");
+            $("#ApellidoPaterno").val("");
+            $("#ApellidoMaterno").val("");
+            $("#Curp").val("");
+            $("#Telefono").val("");
+            $("#Salario").val(0);
+            
+            $("#tituloModalUsuario").text("Crear usuario");
+            $("#btnRegistrarUsuario").text("Registrar");         
+            $("#lblUsuario").text("Registrar los datos del usuario");
+
+            $("#usuarioModal").modal('show');
+        });
+
+        $(".showUsuarioEditModal").click(function () {
+
+            var idUsuario = $(this).attr("data-IdUsuario");
+            var nombre = $(this).attr("data-Nombre");
+            var apellidoPaterno = $(this).attr("data-ApellidoPaterno");
+            var apellidoMaterno = $(this).attr("data-ApellidoMaterno");
+            var curp = $(this).attr("data-Curp");
+            var telefono = $(this).attr("data-Telefono");
+            var salario = $(this).attr("data-Salario");
+
+            $("#IdUsuario").val(idUsuario);
+            $("#Nombre").val(nombre);
+            $("#ApellidoPaterno").val(apellidoPaterno);
+            $("#ApellidoMaterno").val(apellidoMaterno);
+            $("#Curp").val(curp);
+            $("#Telefono").val(telefono);
+            $("#Salario").val(salario);
+
+            $("#tituloModalUsuario").text("Editar usuario");
+            $("#btnRegistrarUsuario").text("Actualizar");
+            $("#lblUsuario").text("Actualizar los datos del usuario");
+
             $("#usuarioModal").modal('show');
         });
 

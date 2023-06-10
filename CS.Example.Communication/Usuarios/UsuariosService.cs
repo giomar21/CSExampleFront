@@ -65,5 +65,23 @@ namespace CS.Example.Communication.Usuarios
 
             return rRquest;
         }
+
+        /// <summary>
+        /// Servicio que actualiza un usuario en la base de datos a través del endpoint solicitado
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public static async Task<Usuario> UpdateUsuario(Usuario usuario)
+        {
+            string urlRequest = $"{URL_BASE}/Usuario";
+
+            var headers = new Dictionary<string, string>() {
+                { "Content-Type", ContentType.JSON }
+            };
+
+            Usuario rRquest = await RestClientHelper.JsonRequest<Usuario, Usuario>(usuario, urlRequest, ContentType.JSON, HttpMethods.Put, headers);
+
+            return rRquest;
+        }
     }
 }

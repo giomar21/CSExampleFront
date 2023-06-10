@@ -14,7 +14,7 @@ namespace CS.Example.Business.Interfaces.Usuarios
 
         Task<OperationResult<Usuario?>> Post(Usuario usuario);
 
-        Task<OperationResult<Usuario?>> Update(Usuario usuario);
+        Task<OperationResult<Usuario?>> Put(Usuario usuario);
 
         Task<OperationResult> Delete(Guid idUsuario);
     }

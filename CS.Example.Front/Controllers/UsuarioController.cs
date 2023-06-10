@@ -1,4 +1,6 @@
 ﻿using CS.Example.Business.Interfaces.Usuarios;
+using CS.Example.Common;
+using CS.Example.Common.Models;
 using CS.Example.Front.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,13 +45,22 @@ namespace CS.Example.Front.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Common.Models.Usuario usuario)
+        public async Task<ActionResult> Create(Usuario usuario)
         {
+            OperationResult<Usuario?> rOperationResult;
+
             try
             {
-                var rCreacion = await _businessUsuario.Post(usuario);
+                if (usuario.IdUsuario == Guid.Empty)
+                {
+                    rOperationResult = await _businessUsuario.Post(usuario);
+                }
+                else
+                {
+                    rOperationResult = await _businessUsuario.Put(usuario);
+                }               
 
-                if (!rCreacion.Success)
+                if (!rOperationResult.Success)
                 {
                     return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
                 }
