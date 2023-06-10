@@ -85,7 +85,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-12">
-                        <form asp-action="View">
+                        <form asp-action="Create" asp-controller="Usuario">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="@usuario.Nombre" class="control-label"></label>
@@ -114,18 +114,17 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="@usuario.Telefono" class="control-label"></label>
-                                <input asp-for="@usuario.Telefono" class="form-control mb-2" />
+                                <input asp-for="@usuario.Telefono" class="form-control mb-4" />
                                 <span asp-validation-for="@usuario.Telefono" class="text-danger"></span>
                             </div>
-                           
+                            <button type="submit" class="btn btn-success button">Registrar</button>
                         </form>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success button button4">Registrar</button>
-                <button type="button" id="btnHideModal" class="btn btn-secondary button button4">
+                <button type="button" id="btnHideModal" class="btn btn-secondary button">
                     Cerrar
                 </button>
             </div>

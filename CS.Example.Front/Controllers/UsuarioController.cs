@@ -43,7 +43,7 @@ namespace CS.Example.Front.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CS.Example.Common.Models.Usuario usuario)
         {
             try
             {
