@@ -47,5 +47,23 @@ namespace CS.Example.Communication.Usuarios
 
             return rRquest;
         }
+
+        /// <summary>
+        /// Servicio que crea un nuevo usuario en la base de datos a través del endpoint solicitado
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public static async Task<Usuario> CreateUsuario(Usuario usuario)
+        {
+            string urlRequest = $"{URL_BASE}/Usuario";
+
+            var headers = new Dictionary<string, string>() {
+                { "Content-Type", ContentType.JSON }
+            };
+
+            Usuario rRquest = await RestClientHelper.JsonRequest<Usuario, Usuario>(usuario, urlRequest, ContentType.JSON, HttpMethods.Post, headers);
+
+            return rRquest;
+        }
     }
 }

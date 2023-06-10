@@ -43,15 +43,22 @@ namespace CS.Example.Front.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CS.Example.Common.Models.Usuario usuario)
+        public async Task<ActionResult> Create(Common.Models.Usuario usuario)
         {
             try
             {
+                var rCreacion = await _businessUsuario.Post(usuario);
+
+                if (!rCreacion.Success)
+                {
+                    return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
 

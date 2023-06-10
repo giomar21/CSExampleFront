@@ -11,5 +11,11 @@ namespace CS.Example.Business.Interfaces.Usuarios
     public interface IBusinessUsuario
     {
         Task<OperationResult<UsuarioModel>> Get(int initRow, int finishRow, string? word);
+
+        Task<OperationResult<Usuario?>> Post(Usuario usuario);
+
+        Task<OperationResult<Usuario?>> Update(Usuario usuario);
+
+        Task<OperationResult> Delete(Guid idUsuario);
     }
 }
