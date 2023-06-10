@@ -1,14 +1,16 @@
 ﻿@using CS.Example.Common.Models
 @{
     ViewBag.Title = "Listado de usuarios";
+    Usuario usuario = new CS.Example.Common.Models.Usuario();
 }
 
 @model CS.Example.Common.Models.UsuarioModel
 
+
 <h1>Listado de usuarios</h1>
 
 <p>
-    <a class="btn btn-secondary mt-2 mb-2" asp-action="Create">Agregar nuevo usuario</a>
+    <a class="btn btn-secondary mt-2 mb-2" id="showUsuarioModal">Agregar nuevo usuario</a>
 </p>
 <table class="table">
     <thead>
@@ -64,3 +66,84 @@
     }
     </tbody>
 </table>
+
+
+
+
+<div class="modal fade" tabindex="-1" id="usuarioModal"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Crear usuario</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          
+            </div>
+            <div class="modal-body">
+
+                <label>Registrar los datos del usuario</label>
+                <hr />
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="View">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.Nombre" class="control-label"></label>
+                                <input asp-for="@usuario.Nombre" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.ApellidoPaterno" class="control-label"></label>
+                                <input asp-for="@usuario.ApellidoPaterno" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.ApellidoPaterno" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.ApellidoMaterno" class="control-label"></label>
+                                <input asp-for="@usuario.ApellidoMaterno" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.ApellidoMaterno" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.Salario" class="control-label"></label>
+                                <input asp-for="@usuario.Salario" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.Salario" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.Curp" class="control-label"></label>
+                                <input asp-for="@usuario.Curp" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.Curp" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@usuario.Telefono" class="control-label"></label>
+                                <input asp-for="@usuario.Telefono" class="form-control mb-2" />
+                                <span asp-validation-for="@usuario.Telefono" class="text-danger"></span>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success button button4">Registrar</button>
+                <button type="button" id="btnHideModal" class="btn btn-secondary button button4">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#showUsuarioModal").click(function () {
+            $("#usuarioModal").modal('show');
+        });
+
+        $("#btnHideModal").click(function () {
+            $("#usuarioModal").modal('hide');
+        });
+    });
+</script> 

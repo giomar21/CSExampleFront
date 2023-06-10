@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,13 @@ namespace CS.Example.Common.Models
         /// <summary>
         /// Apellido paterno
         /// </summary>
+        [DisplayName("Apellido Paterno")]
         public string ApellidoPaterno { get; set; }
 
         /// <summary>
         /// Apellido materno
         /// </summary>
+        [DisplayName("Apellido Materno")]
         public string? ApellidoMaterno { get; set; }
 
         /// <summary>
@@ -39,11 +42,13 @@ namespace CS.Example.Common.Models
         /// <summary>
         /// CURP del usuario
         /// </summary>
+        [DisplayName("CURP")]
         public string Curp { get; set; }
 
         /// <summary>
         /// Teléfono
         /// </summary>
+        [DisplayName("Teléfono")]
         public string? Telefono { get; set; }
 
         /// <summary>
