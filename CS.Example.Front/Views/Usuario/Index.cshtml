@@ -68,7 +68,8 @@
                        data-Curp="@usuario_.Curp"
                        data-Telefono="@usuario_.Telefono"
                        data-Salario="@usuario_.Salario">Editar</a> |
-                    @Html.ActionLink("Eliminar", "Delete", new { /* id=item.PrimaryKey */ }, new { @class= "btn btn-sm btn-danger"})
+                    <a class="btn btn-sm btn-danger showUsuarioModalConfirm"
+                       data-IdUsuario="@usuario_.IdUsuario">Eliminar</a>
                 </td>
             </tr>
     }
@@ -132,6 +133,32 @@
     </div>
 </div>
 
+<div class="modal" tabindex="-1" id="confirmDeleteModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Confirmación</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h6>Está seguro que desea eliminar el usuario?</h6>
+
+                <form asp-action="Delete" asp-controller="Usuario">
+
+                <input id="IdUsuarioDelete" name="IdUsuario" class="form-control mb-2" type="hidden" />
+
+                <button type="submit" class="btn btn-success">Eliminar</button>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+   
+        </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
 
 </script>
@@ -181,6 +208,12 @@
 
         $("#btnHideModal").click(function () {
             $("#usuarioModal").modal('hide');
+        });
+
+        $(".showUsuarioModalConfirm").click(function () {           
+            var idUsuario = $(this).attr("data-IdUsuario");
+            $("#IdUsuarioDelete").val(idUsuario);
+            $("#confirmDeleteModal").modal('show');
         });
     });
 </script> 

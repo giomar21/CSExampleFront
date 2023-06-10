@@ -83,5 +83,21 @@ namespace CS.Example.Communication.Usuarios
 
             return rRquest;
         }
+
+        /// <summary>
+        /// Servicio que realzia un eliminado lógico de un usuario en la base de datos a través del endpoint solicitado
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public static async Task DeleteUsuario(Guid idUsuario)
+        {
+            string urlRequest = $"{URL_BASE}/Usuario?idUsuario={idUsuario}";
+
+            var headers = new Dictionary<string, string>() {
+                { "Content-Type", ContentType.JSON }
+            };
+
+            await RestClientHelper.JsonRequest<object, string>(string.Empty, urlRequest, ContentType.JSON, HttpMethods.Delete, headers);
+        }
     }
 }

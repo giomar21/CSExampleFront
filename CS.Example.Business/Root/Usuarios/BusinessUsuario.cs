@@ -17,9 +17,19 @@ namespace CS.Example.Business.Root.Usuarios
 
         }
 
-        public Task<OperationResult> Delete(Guid idUsuario)
+        public async Task<OperationResult> Delete(Guid idUsuario)
         {
-            throw new NotImplementedException();
+            var result = new OperationResult();
+
+            try
+            {
+                await UsuariosService.DeleteUsuario(idUsuario);
+                return result.ToSuccess();
+            }
+            catch (Exception ex)
+            {
+                return result.ToError($"Error al obtener listado de Usuarios: {ex.Message}");
+            }
         }
 
         public async Task<OperationResult<UsuarioModel>> Get(int initRow, int finishRow, string? word)

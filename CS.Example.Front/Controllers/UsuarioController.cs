@@ -1,5 +1,6 @@
 ﻿using CS.Example.Business.Interfaces.Usuarios;
 using CS.Example.Common;
+using CS.Example.Common.Interfaces;
 using CS.Example.Common.Models;
 using CS.Example.Front.Models;
 using Microsoft.AspNetCore.Http;
@@ -28,12 +29,6 @@ namespace CS.Example.Front.Controllers
             }
 
             return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        // GET: UsuarioController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: UsuarioController/Create
@@ -103,15 +98,22 @@ namespace CS.Example.Front.Controllers
         // POST: UsuarioController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(Guid idUsuario)
         {
             try
-            {
+            { 
+                var rOperationResult = await _businessUsuario.Delete(idUsuario);
+
+                if (!rOperationResult.Success)
+                {
+                    return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View("Shared/Error.cshtml", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
         }
     }
