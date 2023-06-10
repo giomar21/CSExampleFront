@@ -19,12 +19,13 @@ namespace CS.Example.Front.Controllers
         }
 
         // GET: UsuarioController
-        public async Task<ActionResult> Index(int initRow = 1, int finishRow = 10, string? word = null)
+        public async Task<ActionResult> Index(int page = 1, int initRow = 1, int finishRow = 10, string? word = null)
         {
             var rUSuarios = await _businessUsuario.Get(initRow, finishRow, word);
 
             if (rUSuarios.Success)
             {
+                ViewBag.Page = page;
                 return View(rUSuarios.Data);
             }
 

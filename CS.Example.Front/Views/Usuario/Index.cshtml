@@ -1,7 +1,6 @@
 ﻿@using CS.Example.Common.Models
 @{
     ViewBag.Title = "Listado de usuarios";
-    //Usuario usuario = new CS.Example.Common.Models.Usuario();
 }
 
 @model CS.Example.Common.Models.UsuarioModel
@@ -75,6 +74,21 @@
     }
     </tbody>
 </table>
+
+<nav aria-label="Page navigation example">
+    @{
+        int nPages = Convert.ToInt32(Math.Ceiling((decimal)((decimal)Model.Count / (decimal)10)));
+    }
+    <ul class="pagination">  
+        @for (int i = 0; i < nPages; i++)
+        {  
+            <li class="@(i == ((int)ViewBag.Page - 1) ? "page-item active" : "page-item")">
+                <a class="page-link" href="@Url.Action("Index", new { page = (i +1), initRow = (i * 10) + 1, finishRow = (i + 1) * 10 })">@(i+1)</a>
+            </li>  
+        }  
+    </ul>  
+
+</nav>
 
 <div class="modal fade" tabindex="-1" id="usuarioModal"
      data-keyboard="false" data-backdrop="static">
