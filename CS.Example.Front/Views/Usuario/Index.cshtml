@@ -79,13 +79,33 @@
     @{
         int nPages = Convert.ToInt32(Math.Ceiling((decimal)((decimal)Model.Count / (decimal)10)));
     }
-    <ul class="pagination">  
+    <ul class="pagination">
+        @if ((int)ViewBag.Page > 1)
+	    {
+		    <li>
+                <a class="page-link" href="@Url.Action("Index", new { page = 1, initRow = 1, finishRow = 10 })"> Inicio </a>
+		    </li>
+@*		    <li>
+			    <a href="~/Home/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+		    </li>*@
+	    }
+
         @for (int i = 0; i < nPages; i++)
         {  
             <li class="@(i == ((int)ViewBag.Page - 1) ? "page-item active" : "page-item")">
                 <a class="page-link" href="@Url.Action("Index", new { page = (i +1), initRow = (i * 10) + 1, finishRow = (i + 1) * 10 })">@(i+1)</a>
             </li>  
-        }  
+        }
+
+        @if ((int)ViewBag.Page < nPages)
+        {
+@*            <li>
+                <a class="page-link" href="@Url.Action("Index", new { page = ((int)ViewBag.Page +1), initRow = (((int)ViewBag.Page + 1) * 10) + 1, finishRow = ((int)ViewBag.Page + 2) * 10 })">Siguiente</a>
+            </li>*@
+            <li>
+                <a class="page-link" href="@Url.Action("Index", new { page = nPages, initRow = ((nPages - 1) * 10) + 1, finishRow = nPages * 10 })">Último</a>
+            </li>
+        }
     </ul>  
 
 </nav>
